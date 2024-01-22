@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advertisement</title>
+    <style>
+        /* Your CSS styles for the ad */
+        .ad-container {
+            width: 300px;
+            height: 250px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+    <div id="ad-container" class="ad-container">
+        <!-- Content of your ad goes here -->
+        <h2>Special Offer!</h2>
+        <p>Get 20% off on our products. Limited time offer!</p>
+        <button id="refresh-ad">Refresh Ad</button>
+    </div>
+
+    <script>
+        // AJAX request to refresh the ad content
+        $(document).ready(function() {
+            $('#refresh-ad').on('click', function() {
+                $.ajax({
+                    url: '/refresh_ad/',
+                    type: 'GET',
+                    success: function(data) {
+                        // Update the ad content with data from the server
+                        $('#ad-container').html(data.ad_content);
+                    },
+                    error: function(error) {
+                        console.error('Error refreshing ad:', error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
